@@ -32,7 +32,6 @@ header-includes: |
 
   \usepackage{amsmath, amsfonts,amssymb, amsthm}
   \usepackage{siunitx}
-  \usepackage[boxruled,lined,linesnumbered,titlenumbered]{algorithm2e}
 
   \usepackage{setspace}
   \usepackage{changepage}
@@ -41,7 +40,8 @@ header-includes: |
 
   \floatplacement{figure}{!htb}
   \floatplacement{table}{!htb}
-  \lstset{mathescape=true,numbers=left,breaklines=true,frame=single,language=C}
+  \floatplacement{listing}{!htb}
+  \lstset{mathescape=true,numbers=left,breaklines=true,frame=single,language=C,captionpos=b,abovecaptionskip={\abovecaptionskip},belowcaptionskip={\belowcaptionskip},aboveskip=\intextsep}
   \setlength{\captionmargin}{1in}
 
   \newgeometry{margin=1in}
@@ -126,6 +126,11 @@ header-includes: |
   \usepackage{tikz}
   \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
               \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+  \let\lil\lstinputlisting
+  \usepackage{afterpage}
+  \usepackage{xcolor}
+  \hypersetup{colorlinks, allcolors=., urlcolor=blue}
   ```
 output:
   pdf_document:
@@ -138,6 +143,8 @@ output:
 \pagestyle{plain}
 \tableofcontents
 \newpage
+\lstlistoflistings
+\newpage
 \pagestyle{fancy}
 
 
@@ -146,7 +153,7 @@ output:
 
 # About the Author
 
-William "HousedHorse" Findlay has been playing Age of Empires II since
+[William "HousedHorse" Findlay](http://www.wfindlay.com/) has been playing Age of Empires II since
 his father introduced it to him when William was three years old.
 
 He has played Starcraft II at a semi-professional level, reaching rank number
@@ -220,22 +227,10 @@ what a proper script looks like.
 In this guide, we will be showing script examples throughout. The examples will be shown
 in the form of code blocks which look like \autoref{example-block}.
 
-\begin{figure}
-\begin{lstlisting}
-/* hello! */
-/* this is an example code block! */
+\lil[caption={[Example code block]An example RMS code block.},label={example-block}]{code/3/intro.rms}
 
-/* my custom terrain generation goes here! */
-<LAND_GENERATION>
-base_terrain GRASS /* this will create a grassy map! */
-
-\end{lstlisting}
-\caption{An example RMS code block.}
-\label{example-block}
-\end{figure}
-
-Each block will be labeled with a figure number. This is the number that will be
-referenced in text. If you see a figure number in the text, you can take a look
+Each block will be labeled with a **listing number**. This is the number that will be
+referenced in text. If you see a listing number in the text, you can take a look
 nearby for the accompanying sample code.
 
 Code blocks like in \autoref{example-block} will be surrounded by a black box. To the
@@ -254,7 +249,7 @@ or your script will **break horribly** and you will be sad.
 
 Comments are bits of text that you can read and understand but the random map generator
 ignores completely.
-It is important to comment your script so that you could come back and understand it
+It is important to comment your script so that you can come back and understand it
 later.
 
 I also like to use comments in my script template so that when I am making a new
@@ -267,29 +262,53 @@ need to be on the same line and in this way you can write a comment that spans
 multiple lines. A comment can be as short or as long as you like.
 See \autoref{comment-example} for an example.
 
-\begin{figure}
-\begin{lstlisting}
-/* this is a comment. */
-
-/* this is
-a multi-line
-comment. */
-\end{lstlisting}
-\caption{The two types of comments in a random map script. Note the /* and */
+\lil[caption={[Comments]The two types of comments in a random map script. Note the /* and */
 which denote the comment's beginning and end. Also note the space between the beginning
-and end of a comment and the comment itself.}
-\label{comment-example}
-\end{figure}
+and end of a comment and the comment itself.},label={comment-example},float]{code/3/comment-example.rms}
 
 As you can see in \autoref{comment-example}, it's pretty easy to make a comment.
-**BUT there is one super important thing to watch out for!** When you write a comment
+**But there is one super important thing to watch out for!** When you write a comment
 it is **required** to leave a space between the `/*` and the first word and the `*/`
-and the last word. **If you do not use those spaces your script WILL NOT WORK**.
+and the last word. **If you do not use those spaces your script will not work**.
 
 
 ### Constants
+A constant is a way of binding a *value* to a *name* **permanently** in your script.
+What kind of value do I mean? Every object and terrain in the game is represented by
+a *number* that the random map generator understands. To make it so you don't have to
+memorize a list of weird numbers, the game *predefines* many constants for you.
+
+For example instead of typing `1234`, I can type `GRASS` and the game knows that I'm talking
+about the grassy terrain.
+
+However, some objects and terrains do not come with a predefined name. Instead, we have to look up
+the number and give it a name of our own. There are a few rules for doing this:
+
+1. The name you choose must not already be assigned to *another number* either by you *or* by the game.
+1. The number you choose must be assigned to an actual object in the game. Choosing a random number may cause
+   the game to crash!
+1. You define your constant as follows: `#const NAME NUMBER`
+
+Suppose for example, we wanted to include a dead tree in our map. Spooky. We simply do it
+as shown in \autoref{constex}.
+
+\lil[caption={[Constants]Defining a constant for the dead tree object.},label={constex}]{code/3/deadtree.rms}
+
+There will be a table of **all** constants with names *and* without names
+for your convenience later in this guide. Check the table of contents for a page number.
 
 ### Sections
+
+A random map script is divided into *seven sections*. Specific parts of your script will
+go into each section. A section *begins* with the section name enclosed in `< >` and *ends* when
+you start a new one. See \autoref{sections} for an example.
+
+Note that the sections are shown in a particular order. You *can* place the sections in any order you like.
+However, **the order in which I have presented the sections is the order in which the game will read them**.
+In order to avoid confusion, I strongly recommend you use the same order for your sections. This will help
+you figure why your script is behaving the way it is.
+
+\lil[caption={[RMS sections]The seven sections of a random map script.},label={sections}]{code/3/sections.rms}
 
 ### Blocks
 
@@ -355,6 +374,22 @@ and the last word. **If you do not use those spaces your script WILL NOT WORK**.
 
 # Example Scripts
 
+## My Script Template
+[This is the template I use to create all my scripts](https://raw.githubusercontent.com/HousedHorse/hh-rms-aoe2/master/template.rms).
+I find it very easy to start with this file and edit it to my liking. Clicking the link at the beginning
+of this paragraph will allow you to copy and paste it.
+
+I have included some extra constants for convenience as well as comments listing popular alternatives
+to boars, wolves, sheep, forests, etc.
+
+The default settings are for a standard Arabia map. You can change them however you like.
+
 ## My GitHub
 
+Check out my [GitHub repository](https://github.com/HousedHorse/hh-rms-aoe2) which contains all the RMS scripts I have ever written.
+
+Caution: some of these scripts are old and crappy!
+
 ## My Steam Workshop
+
+You can also check out my [Steam Workshop page](https://steamcommunity.com/id/housedhorse/myworkshopfiles/?appid=221380).

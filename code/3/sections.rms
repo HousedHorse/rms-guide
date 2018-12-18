@@ -1,0 +1,43 @@
+<PLAYER_SETUP>
+
+/* player options go here */
+
+
+
+<LAND_GENERATION>
+
+/* land generation goes here */
+
+
+
+<ELEVATION_GENERATION>
+
+/* elevation settings go here */
+
+
+
+<CLIFF_GENERATION>
+
+/* cliff options go here                                    */
+/* if you don't specify anything, default cliffs will spawn */
+/* to prevent cliffs, REMOVE this section                   */
+
+
+
+<TERRAIN_GENERATION>
+
+/* terrain patches go here                */
+/* this is usually where you put forests! */
+
+
+
+<CONNECTION_GENERATION>
+
+/* create connections like roads between players */
+
+
+
+<OBJECTS_GENERATION>
+
+/* spawn units, buildings, resources, eye candy             */
+/* you can spawn units per player such as TCs and villagers */

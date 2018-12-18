@@ -1,0 +1,6 @@
+/* hello! */
+/* this is an example code block! */
+
+/* my custom terrain generation goes here! */
+<LAND_GENERATION>
+base_terrain GRASS /* this will create a grassy map! */

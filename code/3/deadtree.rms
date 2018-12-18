@@ -1,0 +1,7 @@
+/* this is how we define a constant! */
+#const DEADTREE 404
+
+/* then we can use it like this! */
+create_object DEADTREE {
+  /* blah blah blah... */
+}
