@@ -137,7 +137,7 @@ output:
     number_sections: true
     fig_crop: true
     fig_caption: true
-    keep_tex: false
+    keep_tex: true
 ---
 \newpage
 \pagestyle{plain}
@@ -350,25 +350,235 @@ you figure why your script is behaving the way it is.
 
 # Constants
 
+Information for this section based on [Zetnus' RMS Guide](http://aok.heavengames.com/blacksmith/showfile.php?fileid=12178).
+
+The tables are divided into:
+
+1. Buildings
+1. Units
+   i) Player
+   i) Gaia
+1. Resource Objects
+1. Terrains/Lands
+   i) Normal Terrain
+   i) Forest
+   i) Water
+
+The columns are divided into:
+
+1. Description
+   - A brief description of the object/terrain
+   - Extra information here 
+
 ## Buildings
+
+--------------------------------------------------------------
+Description                     Name                  Number
+------------------------------  --------------------  --------
+Town Center\                    TOWN_CENTER           109
+Use with
+`set_place_for_every_player`
+
+\
+
+Wall\                            WALL\                  117
+Use with                        STONE_WALL                   
+`set_place_for_every_player`
+Only works if player lands
+are connected
+
+\
+                                
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+--------------------------------------------------------------
 
 ## Units
 
 ### Player Units
 
-### Predatory Lifeforms
+--------------------------------------------------------------
+Description                     Name                  Number
+------------------------------  --------------------  --------
+'                               '                     '
 
-## Resources
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+--------------------------------------------------------------
+
+### Gaia Units
+
+--------------------------------------------------------------
+Description                     Name                  Number
+------------------------------  --------------------  --------
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+--------------------------------------------------------------
+
+## Resource Objects
+
+--------------------------------------------------------------
+Description                     Name                  Number
+------------------------------  --------------------  --------
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+--------------------------------------------------------------
 
 ## Terrains/Lands
 
+### Normal Terrain
+
+--------------------------------------------------------------
+Description                     Name                  Number
+------------------------------  --------------------  --------
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+--------------------------------------------------------------
+
 ### Forest
+
+--------------------------------------------------------------
+Description                     Name                  Number
+------------------------------  --------------------  --------
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+--------------------------------------------------------------
 
 ### Water
 
-### Normal Terrain
+--------------------------------------------------------------
+Description                     Name                  Number
+------------------------------  --------------------  --------
+'                               '                     '
 
-## My Predefined Constants
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+
+'                               '                     '
+--------------------------------------------------------------
 
 
 
