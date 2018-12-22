@@ -50,7 +50,7 @@ header-includes: |
   {12pt}   % ABOVESPACE
   {12pt}   % BELOWSPACE
   {\itshape}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
+  {0em}       % INDENT (empty value is the same as 0pt)
   {\bfseries} % HEADFONT
   {.}         % HEADPUNCT
   {5pt plus 1pt minus 1pt} % HEADSPACE
@@ -60,7 +60,7 @@ header-includes: |
   {12pt}   % ABOVESPACE
   {12pt}   % BELOWSPACE
   {\normalfont}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
+  {0em}       % INDENT (empty value is the same as 0pt)
   {\bfseries} % HEADFONT
   {.}         % HEADPUNCT
   {5pt plus 1pt minus 1pt} % HEADSPACE
@@ -70,7 +70,7 @@ header-includes: |
   {12pt}   % ABOVESPACE
   {12pt}   % BELOWSPACE
   {\normalfont}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
+  {0em}       % INDENT (empty value is the same as 0pt)
   {\itshape} % HEADFONT
   {.}         % HEADPUNCT
   {5pt plus 1pt minus 1pt} % HEADSPACE
@@ -137,7 +137,7 @@ output:
     number_sections: true
     fig_crop: true
     fig_caption: true
-    keep_tex: true
+    keep_tex: false
 ---
 \newpage
 \pagestyle{plain}
@@ -252,6 +252,10 @@ ignores completely.
 It is important to comment your script so that you can come back and understand it
 later.
 
+\begin{definition}
+A comment is a block of text that humans can read, but the generator will ignore.
+\end{definition}
+
 I also like to use comments in my script template so that when I am making a new
 script I have easy access to all the constants and functions I need. I will be going
 over my template much later in the guide.
@@ -271,12 +275,19 @@ As you can see in \autoref{comment-example}, it's pretty easy to make a comment.
 it is **required** to leave a space between the `/*` and the first word and the `*/`
 and the last word. **If you do not use those spaces your script will not work**.
 
+\FloatBarrier
+
 
 ### Constants
 A constant is a way of binding a *value* to a *name* **permanently** in your script.
 What kind of value do I mean? Every object and terrain in the game is represented by
 a *number* that the random map generator understands. To make it so you don't have to
 memorize a list of weird numbers, the game *predefines* many constants for you.
+
+\begin{definition}
+A constant is a number (or a word associated with that number) that the game
+recognizes as a unit, building, or terrain.
+\end{definition}
 
 For example instead of typing `1234`, I can type `GRASS` and the game knows that I'm talking
 about the grassy terrain.
@@ -294,14 +305,18 @@ as shown in \autoref{constex}.
 
 \lil[caption={[Constants]Defining a constant for the dead tree object.},label={constex}]{code/3/deadtree.rms}
 
-There will be a table of **all** constants with names *and* without names
-for your convenience later in this guide. Check the table of contents for a page number.
+Later in this guide, you will find a section listing all the constants and their predefined names
+for your convenience.
 
 ### Sections
 
 A random map script is divided into *seven sections*. Specific parts of your script will
 go into each section. A section *begins* with the section name enclosed in `< >` and *ends* when
 you start a new one. See \autoref{sections} for an example.
+
+\begin{definition}
+A section is one of the seven segments which separate parts of a random map script.
+\end{definition}
 
 Note that the sections are shown in a particular order. You *can* place the sections in any order you like.
 However, **the order in which I have presented the sections is the order in which the game will read them**.
@@ -311,6 +326,20 @@ you figure why your script is behaving the way it is.
 \lil[caption={[RMS sections]The seven sections of a random map script.},label={sections}]{code/3/sections.rms}
 
 ### Blocks
+So what do we fill our sections with? *Blocks!*
+
+\begin{definition}
+A block is a chunk of code that the generator associates with a specific function.
+\end{definition}
+
+Each *section* has specific *block types* associated with it. A block type that goes into one section
+will not work in a different section. For example, the object block you see starting on `line 2` of
+\autoref{obe} only works in the objects generation section, which the terrain block in \autoref{tbe}
+only works in the terrain generation section.
+
+\lil[caption={[Example object block]An example of an object block.},label={obe}]{code/3/object-block.rms}
+
+\lil[caption={[Example terrain block]An example of a terrain block.},label={tbe}]{code/3/terrain-block.rms}
 
 #### Fields
 
@@ -370,215 +399,227 @@ The columns are divided into:
    - A brief description of the object/terrain
    - Extra information here 
 
+One final important note: **important items will be shown at the top of tables** and remaining items will be
+sorted alphabetically.
+
 ## Buildings
 
---------------------------------------------------------------
-Description                     Name                  Number
-------------------------------  --------------------  --------
-Town Center\                    TOWN_CENTER           109
+\ 
+
+----------------------------------------------------------------------------------------------------
+Description                                                           Name                  Number
+--------------------------------------------------------------------- --------------------  --------
+Town Center\                                                          TOWN_CENTER           109
 Use with
 `set_place_for_every_player`
 
 \
 
-Wall\                            WALL\                  117
-Use with                        STONE_WALL                   
-`set_place_for_every_player`
-Only works if player lands
-are connected
+Wall\                                                                  WALL\                 117
+Use with                                                              STONE_WALL                   
+`set_place_for_every_player`\
+Only works if player lands are connected
 
 \
-                                
-'                               '                     '
 
-'                               '                     '
+Castle                                                                CASTLE                82
+                                                                      
+Archery Range                                                         ARCHERY_RANGE         87
 
-'                               '                     '
+Barracks                                                              BARRACKS              12
 
-'                               '                     '
+Blacksmith                                                            BLACKSMITH            103
 
-'                               '                     '
+Bombard Tower                                                         BOMBARD_TOWER         236
 
-'                               '                     '
+Dock                                                                  DOCK                  45
 
-'                               '                     '
+'                                                                     '                     '
 
-'                               '                     '
+'                                                                     '                     '
 
-'                               '                     '
---------------------------------------------------------------
+'                                                                     '                     '
+
+'                                                                     '                     '
+
+'                                                                     '                     '
+
+'                                                                     '                     '
+
+'                                                                     '                     '
+
+'                                                                     '                     '
+
+'                                                                     '                     '
+
+'                                                                     '                     '
+
+'                                                                     '                     '
+
+'                                                                     '                     '
+
+'                                                                     '                     '
+----------------------------------------------------------------------------------------------------
 
 ## Units
 
 ### Player Units
 
---------------------------------------------------------------
-Description                     Name                  Number
-------------------------------  --------------------  --------
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
---------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Description                                                           Name                  Number
+--------------------------------------------------------------------- --------------------  --------
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+----------------------------------------------------------------------------------------------------
 
 ### Gaia Units
 
---------------------------------------------------------------
-Description                     Name                  Number
-------------------------------  --------------------  --------
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
---------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Description                                                           Name                  Number
+--------------------------------------------------------------------- --------------------  --------
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+----------------------------------------------------------------------------------------------------
 
 ## Resource Objects
 
---------------------------------------------------------------
-Description                     Name                  Number
-------------------------------  --------------------  --------
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
---------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Description                                                           Name                  Number
+--------------------------------------------------------------------- --------------------  --------
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+----------------------------------------------------------------------------------------------------
 
 ## Terrains/Lands
 
 ### Normal Terrain
 
---------------------------------------------------------------
-Description                     Name                  Number
-------------------------------  --------------------  --------
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
---------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Description                                                           Name                  Number
+--------------------------------------------------------------------- --------------------  --------
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+----------------------------------------------------------------------------------------------------
 
 ### Forest
 
---------------------------------------------------------------
-Description                     Name                  Number
-------------------------------  --------------------  --------
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
---------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Description                                                           Name                  Number
+--------------------------------------------------------------------- --------------------  --------
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+----------------------------------------------------------------------------------------------------
 
 ### Water
 
---------------------------------------------------------------
-Description                     Name                  Number
-------------------------------  --------------------  --------
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
-
-'                               '                     '
---------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Description                                                           Name                  Number
+--------------------------------------------------------------------- --------------------  --------
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+                                                                                                   
+'                                                                     '                     '      
+----------------------------------------------------------------------------------------------------
 
 
 
